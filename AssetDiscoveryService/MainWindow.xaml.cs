@@ -22,23 +22,18 @@ namespace AssetDiscoveryService
     /// </summary>
     public partial class MainWindow : Window
     {
+        WebAppAssetDiscovery.Controllers.AssetController data;
      
         public MainWindow()
         {
             InitializeComponent();
+            data = new WebAppAssetDiscovery.Controllers.AssetController();
         }
 
         private void btnScan_Click(object sender, RoutedEventArgs e)
         {
-            ProcessStartInfo psi = new ProcessStartInfo(@"C:\Windows\System32\cmd.exe");
-            psi.UseShellExecute = false;
-            psi.RedirectStandardOutput = true;
-            psi.CreateNoWindow = true;
-            psi.RedirectStandardInput = true;
-            var proc = Process.Start(psi);
-            proc.StandardInput.WriteLine(txtCommand.Text);
-            proc.StandardInput.WriteLine("exit");
-            runOutput.Text = proc.StandardOutput.ReadToEnd();
+
+            runOutput.Text = data.AssetInformations(txtCommand.Text);
 
         }
       
