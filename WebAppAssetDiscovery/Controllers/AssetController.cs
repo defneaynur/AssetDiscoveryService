@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAppAssetDiscovery.App_Start.Data;
 
 namespace WebAppAssetDiscovery.Controllers
 {
     public class AssetController : Controller
     {
+        GetData data;
+        public AssetController()
+        {
+            data = new GetData();
+        }
         // GET: Asset
         public ActionResult Index()
         {
@@ -43,9 +49,10 @@ namespace WebAppAssetDiscovery.Controllers
         }
 
         // GET: Asset/Edit/5
-        public ActionResult Edit(int id)
+        public string AssetInformations(string nmapInput)
         {
-            return View();
+            string output = data.GetAssetInfo(nmapInput);
+            return output;
         }
 
         // POST: Asset/Edit/5
